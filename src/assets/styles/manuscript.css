@@ -1,6 +1,6 @@
 :root {
     --text-color: #2c1810;
-    --accent-color: #3a0202;
+    --accent-color: #000000;
     --ink-bleed: rgba(44, 24, 16, 0.3);
     --ink-fade: rgba(44, 24, 16, 0.1);
     --ivory-overlay: rgba(249, 249, 243, 0.7);
@@ -317,5 +317,126 @@ p, .blog-entry-content {
 
     .plate-background {
         width: 130%;
+    }
+
+    .header-content {
+        width: 95%;
+    }
+
+    .header-plate {
+        width: 150%;
+    }
+
+    .blog-entry.with-plate {
+        padding: 30px 15px;
+        margin: 20px -5px;
+    }
+
+    .plate-background {
+        width: 140%;
+    }
+
+    .blog-entry-title {
+        font-size: 1.8rem;
+    }
+
+    .blog-entry-content {
+        font-size: 1rem;
+    }
+
+    .background-image {
+        max-width: 100%;
+    }
+
+    .bg-2, .bg-3, .bg-4, .bg-5 {
+        display: none;
+    }
+
+    .bg-1 {
+        opacity: 0.4;
+    }
+
+    /* Background image adjustments for mobile */
+    .bg-1 {
+        width: 100%;
+        height: auto;
+    }
+
+    .bg-2 {
+        height: 300vh;
+        left: 10%;
+        top: 10%;
+    }
+
+    .bg-3 {
+        height: 30vh;
+        left: 45%;
+        top: 45%;
+    }
+
+    .bg-4 {
+        height: 15%;
+        left: 65%;
+        top: 25%;
+    }
+
+    .bg-5 {
+        height: 20%;
+        left: 10%;
+        top: 45%;
+    }
+
+    .bg-6 {
+        height: 30vh;
+        left: 50%;
+        top: 40%;
+    }
+
+    .bg-7 {
+        height: 35vh;
+        left: 0;
+        top: 60%;
+    }
+
+    .bg-8 {
+        height: 40vh;
+        left: 60%;
+        top: 70%;
+    }
+
+    .bg-9 {
+        height: 25vh;
+        left: 10%;
+        top: 95%;
+    }
+
+    .bg-10 {
+        height: 20vh;
+        left: 70%;
+        top: 85%;
+    }
+
+    .bg-11 {
+        height: 30vh;
+        left: 45%;
+        top: 45%;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .header-plate {
+        width: 180%;
+    }
+
+    .blog-entry.with-plate {
+        padding: 20px 10px;
+    }
+
+    .blog-entry-title {
+        font-size: 1.6rem;
     }
 }
