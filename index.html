@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grayson Felt</title>
+    <link rel="icon" type="image/png" href="src/assets/images/badge.png">
+    <link rel="stylesheet" href="src/assets/styles/reset.css">
+    <link rel="stylesheet" href="src/assets/styles/manuscript.css">
+</head>
+<body>
+    <div class="background-container">
+        <img src="src/assets/images/background.jpg" alt="" class="background-image bg-1">
+        <img src="src/assets/images/background2.jpg" alt="" class="background-image bg-2">
+        <img src="src/assets/images/background3.png" alt="" class="background-image bg-3">
+        <img src="src/assets/images/background4.jpg" alt="" class="background-image bg-4">
+        <img src="src/assets/images/background5.png" alt="" class="background-image bg-5">
+        <img src="src/assets/images/background6.png" alt="" class="background-image bg-6">
+        <img src="src/assets/images/background7.png" alt="" class="background-image bg-7">
+        <img src="src/assets/images/background8.png" alt="" class="background-image bg-8">
+        <img src="src/assets/images/heads.jpg" alt="" class="background-image bg-9">
+        <img src="src/assets/images/heads2.png" alt="" class="background-image bg-10">
+        <img src="src/assets/images/pilgrim_badge.png" alt="" class="background-image bg-11">
+    </div>
+    <!-- Navigation -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="src/pages/gallery.html">Gallery</a></li>
+                <li><a href="src/pages/contact.html">Missives</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="manuscript-wrapper">
+        <header class="manuscript-header">
+            <img src="src/assets/images/plate2.png" alt="" class="header-plate">
+            <h1>Grayson Felt</h1>
+            <p>Welcome to my blog.</p>
+        </header>
+
+        <main>
+            <section class="blog manuscript-section">
+                <div id="blog-entries">
+                    <article class="blog-entry with-plate">
+                        <img src="src/assets/images/plate1.png" alt="" class="plate-background">
+                        <h3 class="blog-entry-title">Saved for later</h3>
+                        <div class="blog-entry-date">May 23, 2025</div>
+                        <div class="blog-entry-content">
+                            <ul>
+                                <li><a href='https://www.pilgerzeichen.de/pilgerzeichen'>Pilgrim badge archive - Staatliche Museen zu Berlin</a></li>
+                                <li>A plaid blazer</li>
+                                <li><a href='https://en.wikipedia.org/wiki/Every_Man_for_Himself_and_God_Against_All:_A_Memoir'>
+                                    <i>Every Man for Himself and God Against All: A Memoir</i> - Werner Herzog</a></li>
+                                <li><i>Blasius Hochgrewe Monument</i> - 59.41419650176886, 24.73707592961039</li>
+                                <li><i>Tim Hardin 1</i> - Tim Hardin</li>
+                                <li><a href='https://www.etsy.com/listing/1863905413/antique-western-european-17th-century?ref=sim_anchor'>Western European 17th Century Steel Gorget</a> - $3,007.25</li>
+                            </ul>
+                        </div>
+                    </article>
+                    
+                    <hr class="entry-separator">
+                    
+                    <article class="blog-entry with-plate">
+                        <img src="src/assets/images/plate3.png" alt="" class="plate-background plate3">
+                        <h3 class="blog-entry-title">Hello, again</h3>
+                        <div class="blog-entry-date">May 22, 2025</div>
+                        <div class="blog-entry-content">
+                            <p>I have republished my website, which once again includes blog entries and a gallery of my creations. I much prefer sharing the things I care about through a website—it gives me complete control over the format and aesthetic, which, as you can see, I enjoy manipulating.
+
+                                In the near future, you might witness the continuation of my many hobbies: painting, drawing, photography, and perhaps even embroidery, if I can muster the will. I may also write about my adventures here in Estonia, the memories I create travelling, or the things I care about.
+                            
+                                Who knows, if I continue learning Estonian you might have to start translating!
+
+                                <br><br>
+                                I miss you all, and I hope you are doing well. Come see me in Tallinn, the summer is beautiful here. I have an apartment (with a free couch) outside of the old town, and I am surrounded by wonderful friends. 
+                                <br>
+                                I hope to see you soon.</p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="manuscript-footer">
+            <div class="footer-ornament">※</div>
+            <p>Anno Domini MMXXIII</p>
+        </footer>
+    </div>
+
+    <script src="src/scripts/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const textElements = document.querySelectorAll('p, .blog-entry-title, .blog-entry-date');
+            textElements.forEach(element => {
+                const words = element.innerHTML.split(' ');
+                const randomizedWords = words.map(word => {
+                    const rotation = (Math.random() - 0.5) * 2;
+                    const yOffset = (Math.random() - 0.5) * 3;
+                    return `<span class="random-text" style="transform: rotate(${rotation}deg) translateY(${yOffset}px)">${word}</span>`;
+                });
+                element.innerHTML = randomizedWords.join(' ');
+            });
+        });
+
+        document.addEventListener('scroll', () => {
+            const headers = document.querySelectorAll('.shiny-gold');
+            headers.forEach(header => {
+                const rect = header.getBoundingClientRect();
+                const viewportHeight = window.innerHeight;
+                const elementCenter = rect.top + (rect.height / 2);
+                const distanceFromCenter = Math.abs(viewportHeight/2 - elementCenter);
+                const angle = (distanceFromCenter * 0.2) % 360; // Reduced multiplier for slower movement
+                header.style.setProperty('--gradient-angle', `${angle}deg`);
+            });
+        });
+    </script>
+</body>
+</html>
