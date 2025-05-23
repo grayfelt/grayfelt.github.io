@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Medieval Portfolio</title>
+    <link rel="stylesheet" href="../assets/styles/reset.css">
+    <link rel="stylesheet" href="../assets/styles/manuscript.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="contact.html">Missives</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="manuscript-wrapper">
+        <header class="manuscript-header">
+            <h1 data-text="Gallery of Illuminations">Gallery of Illuminations</h1>
+            <p class="illuminated-text">Behold these works of artistry and craft...</p>
+        </header>
+
+        <main>
+            <section class="gallery-items">
+                <!-- Example gallery item -->
+                <div class="gallery-item">
+                    <img src="../assets/images/artwork1.jpg" alt="Artwork description">
+                    <div class="frame-overlay frame-1"></div>
+                </div>
+                <!-- More gallery items... -->
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Randomly assign frame variations to gallery items
+        document.addEventListener('DOMContentLoaded', function() {
+            const items = document.querySelectorAll('.frame-overlay');
+            items.forEach(frame => {
+                const randomFrame = Math.floor(Math.random() * 3) + 1;
+                frame.className = `frame-overlay frame-${randomFrame}`;
+            });
+        });
+    </script>
+</body>
+</html>

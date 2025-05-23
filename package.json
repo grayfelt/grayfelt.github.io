@@ -1,0 +1,16 @@
+{
+  "name": "medieval-portfolio",
+  "version": "1.0.0",
+  "description": "A portfolio website styled like a medieval manuscript, featuring a blog section.",
+  "main": "src/scripts/main.js",
+  "scripts": {
+    "start": "live-server src",
+    "build": "echo 'Build process not defined yet.'"
+  },
+  "author": "Grayson Felt",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  }
+}
