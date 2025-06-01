@@ -253,8 +253,7 @@ h2 {
 
 .blog-entry-image {
     width: 100%;
-    max-height: 400px;
-    object-fit: cover;
+    height: auto;
     margin: 1rem 0;
 }
 
