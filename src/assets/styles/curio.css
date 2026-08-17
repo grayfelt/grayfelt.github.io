@@ -1,0 +1,207 @@
+/* ============================================================
+   curio.css
+   The curio cabinet: rows of planks with PNG cutout objects
+   standing on them.
+
+   YOU SUPPLY, one per row:
+       src/assets/images/cabinet/plank-1.png
+       src/assets/images/cabinet/plank-2.png
+       src/assets/images/cabinet/plank-3.png   ...and so on
+
+   Each row uses its own plank, so no two shelves look alike.
+   Until the files exist you'll see a plain wooden band, so the
+   layout is still testable.
+
+   Cutouts go in src/assets/images/objects/*.png (transparent).
+   ============================================================ */
+
+/* This stylesheet only loads on the curio page, so centring here
+   doesn't affect the blog header. */
+.manuscript-header {
+  text-align: center;
+  margin-bottom: 6.5rem;   /* headroom for tall objects on shelf 1 */
+}
+
+.cabinet {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ---------- one shelf ----------
+   The plank is a real <img>, not a background, so it keeps its own
+   aspect ratio at every screen width instead of being squashed to a
+   fixed height.
+
+   Objects are absolutely positioned inside .shelf-plank, whose height
+   equals the plank image's height. So `bottom: 60%` means "sit 60% of
+   the way up the plank" — tune --sit to raise or lower them.
+   -------------------------------------------------------------- */
+.shelf {
+  position: relative;
+  /* headroom so tall objects don't collide with the shelf above */
+  margin-top: 5rem;
+}
+.shelf:first-child { margin-top: 0; }
+
+.shelf-plank {
+  position: relative;
+  /* --sit: how far up the plank the objects' bases rest.
+     60% = bases sit just above the plank's midline. */
+  --sit: 60%;
+}
+
+.plank-img {
+  display: block;
+  width: 100%;
+  height: auto;                 /* natural proportions, never stretched */
+  /* drop-shadow follows the plank's real edges; box-shadow would
+     draw a rectangle around the transparent PNG bounding box */
+  filter: saturate(0.9) contrast(1.04) brightness(0.98)
+          drop-shadow(0 5px 7px rgba(30, 26, 21, 0.4));
+}
+
+/* the row of objects, standing on the plank */
+.shelf-row {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: var(--sit);
+  display: flex;
+  align-items: flex-end;        /* bases aligned, heights grow upward */
+  justify-content: space-around;
+  gap: clamp(0.5rem, 2vw, 2rem);
+  padding-inline: clamp(0.5rem, 3vw, 2rem);
+  pointer-events: none;         /* the row itself isn't clickable */
+}
+.shelf-row > * { pointer-events: auto; }
+
+/* ---------- an object ---------- */
+.shelf-object {
+  padding: 0;
+  display: block;
+  position: relative;
+  height: var(--h, 6rem);        /* set per object in objects.json */
+  transform-origin: bottom center;
+  transform: rotate(var(--tilt, 0deg));
+  transition: transform 240ms cubic-bezier(0.2, 0.8, 0.2, 1),
+              filter 240ms ease;
+  filter: saturate(0.9) contrast(1.02)
+          drop-shadow(2px 4px 3px rgba(30, 26, 21, 0.45));
+  cursor: pointer;
+}
+
+.shelf-object img { height: 100%; width: auto; max-width: none; }
+
+.shelf-object:hover,
+.shelf-object:focus-visible {
+  transform: rotate(0deg) scale(1.16) translateY(-3px);
+  filter: saturate(1.05) contrast(1.05)
+          drop-shadow(3px 8px 7px rgba(30, 26, 21, 0.5));
+  z-index: 5;
+}
+
+/* name plate, appears on hover, sits on the plank like a museum label */
+.shelf-object::after {
+  content: attr(data-title);
+  position: absolute;
+  bottom: -1.85rem;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-family: var(--utility);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #e8dfc8;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+.shelf-object:hover::after,
+.shelf-object:focus-visible::after { opacity: 1; }
+
+/* ---------- detail dialog ---------- */
+.object-dialog {
+  margin: auto;                  /* the global reset removes dialog centring */
+  position: relative;
+  width: min(38rem, calc(100vw - 2rem));
+  max-height: calc(100vh - 4rem);
+  padding: 0;
+  background: var(--panel);
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-top-color: #efe9d7;
+  border-left-color: #efe9d7;
+  box-shadow: 6px 6px 0 rgba(30, 26, 21, 0.25);
+}
+.object-dialog::backdrop { background: rgba(30, 26, 21, 0.62); }
+
+.object-dialog-inner {
+  display: grid;
+  gap: 1.4rem;
+  padding: 1.7rem;
+}
+@media (min-width: 40rem) {
+  .object-dialog-inner { grid-template-columns: 11rem 1fr; align-items: start; }
+}
+
+.object-dialog img {
+  width: 100%;
+  height: auto;
+  padding: 6px;
+  background: var(--parchment);
+  border: 1px solid var(--rule);
+}
+
+.object-dialog h2 {
+  font-family: var(--display);
+  font-variation-settings: "SOFT" 25, "WONK" 1;
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 1.14;
+  margin-bottom: 0.35rem;
+}
+
+.object-dialog .meta {
+  font-family: var(--utility);
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--oxblood);
+  padding-bottom: 0.7rem;
+  border-bottom: 1px dotted var(--rule);
+  margin-bottom: 0.9rem;
+}
+
+.object-dialog .note + .note { margin-top: 0.7rem; }
+
+.object-dialog .dialog-close {
+  position: absolute;
+  top: 0.45rem;
+  right: 0.6rem;
+  font-family: var(--utility);
+  font-size: 0.95rem;
+  line-height: 1;
+  color: var(--ink-dim);
+  padding: 0.35rem 0.5rem;
+  border: 1px solid transparent;
+}
+.object-dialog .dialog-close:hover {
+  color: var(--oxblood);
+  border-color: var(--rule);
+  background: var(--panel-deep);
+}
+
+/* ---------- mobile ---------- */
+@media (max-width: 34rem) {
+  .shelf-row { justify-content: space-evenly; gap: 0.4rem; }
+  .shelf-object { height: calc(var(--h, 6rem) * 0.7); }
+  .shelf-object::after { display: none; }   /* no hover on touch */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shelf-object { transition: none; }
+  .shelf-object:hover { transform: rotate(var(--tilt, 0deg)); }
+}

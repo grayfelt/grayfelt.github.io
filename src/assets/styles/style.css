@@ -1,0 +1,340 @@
+/* ============================================================
+   style.css
+   Direction: parchment, foxed and grubby. Early-2000s personal
+   site — visible borders, bevelled edges, monospace labels —
+   but set on a disciplined type scale so it reads as deliberate
+   rather than broken.
+
+   BACKGROUND TEXTURE: drop your file at
+       src/assets/images/texture.jpg   (or .png)
+   and it appears automatically. Until then you get the flat
+   parchment colour plus generated grain. See --texture below.
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=EB+Garamond:ital,wght@0,400..600;1,400&family=Courier+Prime:wght@400;700&family=UnifrakturMaguntia&display=swap");
+
+/* ---------- reset ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+img, picture, svg { display: block; max-width: 100%; height: auto; }
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+a { color: inherit; }
+
+@font-face {
+  font-family: "Gothic Script";
+  src: url("/assets/fonts/gothic_script.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Typewriter";
+  src: url("/assets/fonts/typewriter.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* ---------- tokens ---------- */
+:root {
+  --parchment:  #d7d1bf;   /* page — foxed, not cream */
+  --panel:      #e3ddcb;   /* raised areas */
+  --panel-deep: #c8c1ac;   /* recessed areas */
+  --ink:        #1e1a15;   /* body text */
+  --ink-dim:    #6a6252;   /* secondary */
+  --oxblood:    #8c1c11;   /* dates, initials */
+  --oxblood-lit:#a52618;
+  --verdigris:  #2f5d4a;   /* links */
+  --gilt:       #8a6d2f;   /* ornaments */
+  --rule:       #a9a290;
+  --rule-soft:  #bdb6a2;
+
+  --display: "Gothic Script", Georgia, serif;
+  --script:  "Gothic Script", Georgia, serif;
+  --body:    "Times New Roman", Georgia, serif;
+  --utility: "Times New Roman", ui-monospace, monospace;
+
+  /* Swap this to .png if that's what you upload.
+     Delete the url() and it falls back to flat colour. */
+  --texture: url("/assets/images/texture.jpg");
+
+  --measure: 40rem;
+  --margin-col: 10rem;
+  --gutter: 1.4rem;
+}
+
+/* ---------- page ---------- */
+html { -webkit-text-size-adjust: 100%; background: var(--parchment); }
+
+body {
+  position: relative;
+  background-color: var(--parchment);
+  background-image: var(--texture);
+  background-repeat: repeat;
+  background-attachment: fixed;
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: clamp(1.08rem, 1rem + 0.4vw, 1.24rem);
+  line-height: 1.64;
+  padding-inline: var(--gutter);
+}
+
+/* generated grain, sits on top of whatever texture you upload */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.28;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/></filter><rect width='180' height='180' filter='url(%23n)' opacity='0.55'/></svg>");
+}
+
+::selection { background: var(--oxblood); color: var(--panel); }
+
+.manuscript-wrapper {
+  position: relative;
+  z-index: 1;
+  max-width: var(--measure);
+  margin-inline: auto;
+  padding-block: 2.5rem 5rem;
+}
+
+/* ---------- navigation ----------
+   Bevelled tabs: light top-left, dark bottom-right. The oldest
+   trick in the 90s UI book, used once and then left alone. */
+.bookmark-tabs {
+  position: relative;
+  z-index: 2;
+  max-width: var(--measure);
+  margin-inline: auto;
+  display: flex;
+  gap: 0.4rem;
+  padding-top: 1.4rem;
+  font-family: var(--utility);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--rule);
+}
+
+.bookmark-tabs .tab {
+  text-decoration: none;
+  color: var(--ink-dim);
+  padding: 0.4rem 0.9rem 0.35rem;
+  background: var(--panel-deep);
+  border: 1px solid var(--rule);
+  border-bottom: none;
+  border-top-color: var(--panel);
+  border-left-color: var(--panel);
+  margin-bottom: -1px;
+}
+.bookmark-tabs .tab:hover { color: var(--ink); background: var(--panel); }
+.bookmark-tabs .tab.current {
+  color: var(--oxblood);
+  background: var(--parchment);
+  border-bottom: 1px solid var(--parchment);
+  font-weight: 700;
+}
+
+/* ---------- header ---------- */
+.manuscript-header {
+  margin-bottom: 4rem;
+  padding-top: 2.5rem;
+}
+
+.manuscript-header h1 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(2.8rem, 1.8rem + 5vw, 4.6rem);
+  line-height: 1;
+  color: var(--ink);
+}
+
+.manuscript-header .tagline {
+  font-family: var(--utility);
+  font-size: 0.74rem;
+  letter-spacing: 0.18em;
+  color: var(--ink-dim);
+  text-transform: uppercase;
+  margin-top: 0.8rem;
+  padding-top: 0.7rem;
+  display: inline-block;
+}
+
+/* ---------- entries ---------- */
+#blog-entries {
+  display: flex;
+  flex-direction: column;
+  gap: 4.5rem;
+}
+
+.blog-entry {
+  position: relative;
+  padding-left: 1.5rem;
+  border-left: 1px solid var(--rule);
+}
+
+.blog-entry-date {
+  font-family: var(--utility);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--oxblood);
+  margin-bottom: 0.55rem;
+}
+
+.blog-entry-title {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(1.5rem, 1.25rem + 1.1vw, 2rem);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  margin-bottom: 1.1rem;
+}
+
+.blog-entry-content > * + * { margin-top: 1.1rem; }
+
+/* the big initial — blackletter, sunk into the text block */
+.blog-entry-content > p:first-of-type::first-letter {
+  float: left;
+  font-family: var(--script);
+  font-weight: 400;
+  font-size: 3.8em;
+  line-height: 0.8;
+  color: var(--oxblood);
+  padding-right: 0.09em;
+  padding-top: 0.03em;
+}
+
+/* lists, quotes and images clear the floated initial */
+.blog-entry-content ul,
+.blog-entry-content ol,
+.blog-entry-content blockquote,
+.blog-entry-content picture,
+.blog-entry-content .image-missing { clear: left; }
+
+.blog-entry-content a {
+  color: var(--verdigris);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  text-decoration-color: var(--rule);
+}
+.blog-entry-content a:hover {
+  color: var(--oxblood-lit);
+  text-decoration-color: var(--oxblood);
+  background: rgba(140, 28, 17, 0.07);
+}
+
+.blog-entry-content blockquote {
+  font-style: italic;
+  color: var(--ink-dim);
+  background: var(--panel-deep);
+  padding: 0.9rem 1.1rem;
+  border-left: 3px solid var(--gilt);
+  border-top: 1px solid var(--rule-soft);
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.blog-entry-content ul { list-style: none; padding-left: 0; }
+.blog-entry-content li { padding-left: 1.4rem; position: relative; margin-top: 0.55rem; }
+.blog-entry-content li::before {
+  content: "†";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--gilt);
+  font-size: 0.85em;
+}
+
+/* images get a hard, unblurred drop shadow — very period, and
+   it stops photos floating in space */
+.blog-entry-content picture,
+.blog-entry-image { margin-block: 1.7rem; max-width: 100%; }
+
+.blog-entry-content picture img,
+.blog-entry-image {
+  width: 100%;
+  padding: 5px;
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  box-shadow: 4px 4px 0 var(--panel-deep), 4px 4px 0 1px var(--rule);
+  filter: saturate(0.92) contrast(1.03);
+}
+
+/* ---------- footer ---------- */
+.manuscript-footer {
+  margin-top: 6rem;
+  padding-top: 1.4rem;
+  border-top: 1px dotted var(--rule);
+  text-align: center;
+  font-family: var(--utility);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  color: var(--ink-dim);
+  text-transform: uppercase;
+}
+.footer-ornament { color: var(--gilt); margin-bottom: 0.5rem; font-size: 1rem; }
+
+/* ---------- hung marginal date ----------
+   Your favourite bit. The rule now runs the full height of the
+   entry and the date sits against it, right-aligned. */
+@media (min-width: 72rem) {
+  .manuscript-wrapper,
+  .bookmark-tabs {
+    max-width: calc(var(--measure) + var(--margin-col));
+    padding-left: var(--margin-col);
+  }
+  .blog-entry-date {
+    position: absolute;
+    left: calc(-1 * var(--margin-col));
+    top: 0.55rem;
+    width: calc(var(--margin-col) - 2.4rem);
+    text-align: right;
+    margin-bottom: 0;
+  }
+}
+
+/* ---------- single-post page ---------- */
+.back-link {
+  margin-top: 3.2rem;
+  font-family: var(--utility);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.back-link a { color: var(--ink-dim); text-decoration: none; }
+.back-link a:hover { color: var(--oxblood); }
+
+/* ---------- missing image placeholder ---------- */
+.image-missing {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  align-items: center;
+  justify-content: center;
+  min-height: 9rem;
+  margin-block: 1.7rem;
+  border: 1px dashed var(--rule);
+  background: var(--panel-deep);
+  font-family: var(--utility);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+.image-missing code { text-transform: none; letter-spacing: 0; color: var(--oxblood); }
+
+/* ---------- word tilt ---------- */
+.random-text { display: inline-block; }
+
+@media (prefers-reduced-motion: reduce) {
+  .random-text { transform: none !important; }
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+:focus-visible { outline: 2px solid var(--oxblood); outline-offset: 3px; }

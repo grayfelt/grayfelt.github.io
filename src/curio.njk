@@ -1,0 +1,48 @@
+---
+layout: base.njk
+title: Curio Cabinet
+navKey: curio
+description: Objects collected, mostly around Estonia.
+permalink: /curio/
+extraCss: curio
+extraJs: curio
+---
+<header class="manuscript-header">
+  <h1>Curio Cabinet</h1>
+</header>
+
+<main>
+
+  <div class="cabinet">
+    {% for shelfNum in shelves %}
+      <section class="shelf" data-shelf="{{ shelfNum }}">
+        <div class="shelf-plank">
+          <img class="plank-img"
+               src="/assets/images/cabinet/plank-{{ shelfNum }}.png"
+               alt="" aria-hidden="true">
+          <div class="shelf-row">
+            {% for obj in objects %}
+              {% if obj.shelf == shelfNum %}
+                <button class="shelf-object"
+                        style="--h: {{ obj.height or '6rem' }}; --tilt: {{ obj.tilt or 0 }}deg"
+                        data-slug="{{ obj.slug }}"
+                        data-title="{{ obj.title }}"
+                        aria-label="{{ obj.title }} — open details">
+                  <img src="/assets/images/objects/{{ obj.image }}.png"
+                       alt="{{ obj.title }}" loading="lazy" decoding="async">
+                </button>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+    {% endfor %}
+  </div>
+</main>
+
+<dialog class="object-dialog" id="object-dialog">
+  <button class="dialog-close" aria-label="Close">✕</button>
+  <div class="object-dialog-inner" id="object-dialog-inner"></div>
+</dialog>
+
+<script id="objects-data" type="application/json">{{ objects | dump | safe }}</script>

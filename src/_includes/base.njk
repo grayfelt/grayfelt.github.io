@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if title %}{{ title }} — {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ description or site.tagline }}">
+  <link rel="icon" type="image/png" href="/assets/images/badge.png">
+  <link rel="stylesheet" href="/assets/styles/style.css">
+  {% if extraCss %}<link rel="stylesheet" href="/assets/styles/{{ extraCss }}.css">{% endif %}
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-06NQ6Z8600"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-06NQ6Z8600');
+  </script>
+</head>
+<body>
+  {% include "nav.njk" %}
+
+  <div class="manuscript-wrapper">
+    {{ content | safe }}
+    {% include "footer.njk" %}
+  </div>
+
+  <script src="/scripts/main.js" defer></script>
+  {% if extraJs %}<script src="/scripts/{{ extraJs }}.js" defer></script>{% endif %}
+</body>
+</html>

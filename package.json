@@ -1,16 +1,16 @@
 {
-  "name": "medieval-portfolio",
-  "version": "1.0.0",
-  "description": "A portfolio website styled like a medieval manuscript, featuring a blog section.",
-  "main": "src/scripts/main.js",
+  "name": "graysonfelt",
+  "version": "2.0.0",
+  "description": "Personal site and shelves, styled as a medieval manuscript.",
+  "type": "module",
   "scripts": {
-    "start": "live-server src",
-    "build": "echo 'Build process not defined yet.'"
+    "dev": "eleventy --serve",
+    "build": "eleventy"
   },
   "author": "Grayson Felt",
   "license": "MIT",
-  "dependencies": {},
   "devDependencies": {
-    "live-server": "^1.2.1"
+    "@11ty/eleventy": "^3.0.0",
+    "@11ty/eleventy-img": "^6.0.0"
   }
 }

@@ -1,0 +1,8 @@
+{
+  "title": "Grayson Felt",
+  "footerYear": "Anno Domini MMXXIII",
+  "nav": [
+    { "label": "Home", "url": "/", "key": "home" },
+    { "label": "Curio Cabinet", "url": "/curio/", "key": "curio" }
+  ]
+}

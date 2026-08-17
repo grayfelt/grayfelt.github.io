@@ -1,0 +1,8 @@
+{# One blog entry. #}
+<article class="blog-entry">
+  <div class="blog-entry-date">{{ post.data.date | readableDate }}</div>
+  <h3 class="blog-entry-title">{{ post.data.title }}</h3>
+  <div class="blog-entry-content">
+    {{ post.templateContent | safe }}
+  </div>
+</article>

@@ -1,0 +1,58 @@
+[
+  {
+    "slug": "canterbury-tales",
+    "title": "The Canterbury Tales",
+    "image": "canterbury",
+    "shelf": 1,
+    "height": "12rem",
+    "tilt": -2,
+    "acquired": "Bought somewhere in the U.K., 2026",
+    "origin": "Written in 1300s by Chaucer, printed in 1960 by Penguin Books",
+    "notes": [
+      "£4.50",
+      "It's hard to believe I journeyed the same path to Canterbury--only by train instead of by foot!"
+    ]
+  },
+  {
+    "slug": "icon1",
+    "title": "Our Lady of Kazan",
+    "image": "icon",
+    "shelf": 1,
+    "height": "10rem",
+    "tilt": 1,
+    "acquired": "Osta.ee, 2025",
+    "origin": "Russian Imperial period, c. 1915.",
+    "notes": [
+      "A famous style for Kazan.",
+      "Was purchased in a period between revolutions, only 2 years before the brutal Bolshevik uprising.",
+      "A handwritten date on the back states Nov 7th, 1915 as the acquisition date."
+    ]
+  },
+  {
+    "slug": "oldlady",
+    "title": "Framed portrait",
+    "image": "oldlady",
+    "shelf": 1,
+    "height": "11rem",
+    "tilt": -3,
+    "acquired": "Punane Ristik, 2025",
+    "notes": [
+      "She sits high on my wall."
+    ]
+  },
+  {
+    "slug": "council",
+    "title": "Assembly of the Saints of the Kyiv Caves",
+    "image": "council",
+    "shelf": 2,
+    "height": "10rem",
+    "tilt": -1,
+    "acquired": "Osta.ee, 2025",
+    "origin": "Kyiv workshops, c. 1880-1930",
+    "notes": [
+      "Depicts a group of saints gathered around the Kyiv-Pechersk monastery.",
+      "The caves behind represent a diagram of Lavra's sacred geography.",
+      "Endlessly fascinating details."
+    ]
+  }
+]

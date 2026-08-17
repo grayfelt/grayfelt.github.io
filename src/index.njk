@@ -1,0 +1,19 @@
+---
+layout: base.njk
+navKey: home
+---
+<header class="manuscript-header">
+  <h1>{{ site.title }}</h1>
+  <p class="tagline">{{ site.tagline }}</p>
+</header>
+
+<main>
+  <section class="blog">
+    <div id="blog-entries">
+      {% for post in collections.posts %}
+        {% set post = post %}
+        {% include "post-card.njk" %}
+      {% endfor %}
+    </div>
+  </section>
+</main>

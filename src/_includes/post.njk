@@ -1,0 +1,13 @@
+---
+layout: base.njk
+---
+<main>
+  <article class="blog-entry">
+    <div class="blog-entry-date">{{ date | readableDate }}</div>
+    <h3 class="blog-entry-title">{{ title }}</h3>
+    <div class="blog-entry-content">
+      {{ content | safe }}
+    </div>
+  </article>
+  <p class="back-link"><a href="/">← All entries</a></p>
+</main>

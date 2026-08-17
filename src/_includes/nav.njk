@@ -1,0 +1,8 @@
+<nav class="bookmark-tabs" aria-label="Primary">
+  {% for item in site.nav %}
+    <a href="{{ item.url }}"
+       class="tab{% if item.key == navKey %} current{% endif %}"
+       {% if item.key == navKey %}aria-current="page"{% endif %}
+       data-tab="{{ item.key }}">{{ item.label }}</a>
+  {% endfor %}
+</nav>
