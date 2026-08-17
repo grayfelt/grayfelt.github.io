@@ -39,14 +39,14 @@ a { color: inherit; }
 
 /* ---------- tokens ---------- */
 :root {
-  --parchment:  #d7d1bf;   /* page — foxed, not cream */
+  --parchment:  #e6e4de;   /* page — foxed, not cream */
   --panel:      #e3ddcb;   /* raised areas */
   --panel-deep: #c8c1ac;   /* recessed areas */
   --ink:        #1e1a15;   /* body text */
   --ink-dim:    #6a6252;   /* secondary */
   --oxblood:    #8c1c11;   /* dates, initials */
   --oxblood-lit:#a52618;
-  --verdigris:  #2f5d4a;   /* links */
+  --verdigris:  #0000EE;   /* links */
   --gilt:       #8a6d2f;   /* ornaments */
   --rule:       #a9a290;
   --rule-soft:  #bdb6a2;
@@ -54,14 +54,14 @@ a { color: inherit; }
   --display: "Gothic Script", Georgia, serif;
   --script:  "Gothic Script", Georgia, serif;
   --body:    "Times New Roman", Georgia, serif;
-  --utility: "Times New Roman", ui-monospace, monospace;
+  --utility: "Times New Roman", Georgia, serif;
 
   /* Swap this to .png if that's what you upload.
      Delete the url() and it falls back to flat colour. */
   --texture: url("/assets/images/texture.jpg");
 
-  --measure: 40rem;
-  --margin-col: 10rem;
+  --measure: 60rem;
+  --margin-col: 13rem;
   --gutter: 1.4rem;
 }
 
@@ -180,15 +180,15 @@ body::before {
 
 .blog-entry-date {
   font-family: var(--utility);
-  font-size: 0.72rem;
+  font-size: 1rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--oxblood);
-  margin-bottom: 0.55rem;
+  margin-bottom: 0.25rem;
 }
 
 .blog-entry-title {
-  font-family: var(--display);
+  font-family: var(--body);
   font-weight: 600;
   font-size: clamp(1.5rem, 1.25rem + 1.1vw, 2rem);
   line-height: 1.12;
@@ -338,3 +338,8 @@ body::before {
 }
 
 :focus-visible { outline: 2px solid var(--oxblood); outline-offset: 3px; }
+
+.blog-entry-content picture img {
+  width: 65%;
+  margin-inline: auto;
+}
