@@ -94,4 +94,33 @@ const SELECTOR = ".blog-entry-title, .blog-entry-date, .manuscript-header h1, li
       });
     });
   }, { passive: true });
+
+  /* ---- floaters: drift slower than the page scrolls ----
+     .floaters is `position: fixed` (see style.css), so with no
+     transform a floater never moves at all as you scroll — that's
+     speed 0. To make it track the page at some fraction of full
+     speed, we push it up by translateY(-scrollY * speed): at
+     speed 1 it moves exactly like a normal in-page element, at
+     speed 0 it stays glued to the viewport, and values in between
+     lag behind proportionally. */
+  const floaters = document.querySelectorAll(".floater");
+  if (floaters.length && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    let floatersQueued = false;
+    const updateFloaters = function () {
+      const scrollY = window.scrollY;
+      floaters.forEach(function (el) {
+        const speed = parseFloat(el.dataset.speed) || 0.4;
+        el.style.transform = "translateY(" + (-scrollY * speed) + "px) rotate(var(--floater-rotate, 0deg))";
+      });
+    };
+    updateFloaters();
+    document.addEventListener("scroll", function () {
+      if (floatersQueued) return;
+      floatersQueued = true;
+      requestAnimationFrame(function () {
+        floatersQueued = false;
+        updateFloaters();
+      });
+    }, { passive: true });
+  }
 })();

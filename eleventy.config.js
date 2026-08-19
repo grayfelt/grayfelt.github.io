@@ -3,11 +3,20 @@ import fs from "node:fs";
 import path from "node:path";
 
 const ORIGINALS = "src/assets/images/originals";
+const FLOATERS = "src/assets/images/floaters";
 const EXTENSIONS = [".jpg", ".jpeg", ".png", ".webp", ".JPG", ".JPEG", ".PNG"];
 
 function findOriginal(slug) {
   for (const ext of EXTENSIONS) {
     const p = path.join(ORIGINALS, slug + ext);
+    if (fs.existsSync(p)) return p;
+  }
+  return null;
+}
+
+function findFloater(slug) {
+  for (const ext of EXTENSIONS) {
+    const p = path.join(FLOATERS, slug + ext);
     if (fs.existsSync(p)) return p;
   }
   return null;
@@ -73,6 +82,41 @@ export default function (eleventyConfig) {
       loading: "lazy",
       decoding: "async",
     });
+  });
+
+  /* {% floater "background3", { top: "8vh", left: "4vw", width: "220px",
+        rotate: "-6deg", speed: 0.35, z: 1 } %}
+
+     Decorative, scattered background images for the index page. The
+     source files in floaters/ are full-resolution scan dumps (some
+     several MB) — this always downsizes them to a single small webp,
+     since they only ever appear faded and shrunk behind the text. */
+  eleventyConfig.addAsyncShortcode("floater", async (slug, opts = {}) => {
+    const original = findFloater(slug);
+
+    if (!original) {
+      console.warn(`[floaters] No image found for "${slug}" — expected ${FLOATERS}/${slug}.jpg (or .png).`);
+      return "";
+    }
+
+    const metadata = await eleventyImage(original, {
+      widths: [480],
+      formats: ["webp"],
+      outputDir: "./_site/assets/generated/",
+      urlPath: "/assets/generated/",
+      sharpWebpOptions: { quality: 60 },
+    });
+
+    const img = metadata.webp[0];
+    const top = opts.top || "0";
+    const left = opts.left || "0";
+    const width = opts.width || "220px";
+    const rotate = opts.rotate || "0deg";
+    const speed = opts.speed !== undefined ? opts.speed : 0.4;
+    const z = opts.z !== undefined ? opts.z : 1;
+    const style = `top:${top}; left:${left}; z-index:${z}; --floater-w:${width}; --floater-rotate:${rotate};`;
+
+    return `<img class="floater" src="${img.url}" width="${img.width}" height="${img.height}" style="${style}" data-speed="${speed}" alt="" aria-hidden="true" loading="lazy" decoding="async">`;
   });
 
   return {

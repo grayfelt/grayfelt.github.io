@@ -1,5 +1,5 @@
 ---
-title: Curio shelf, shadow box, devotional display.
+title: Curio shelf, shadow box, devotional display
 date: 2025-07-14
 ---
 

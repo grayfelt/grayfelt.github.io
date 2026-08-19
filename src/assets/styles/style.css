@@ -39,17 +39,17 @@ a { color: inherit; }
 
 /* ---------- tokens ---------- */
 :root {
-  --parchment:  #e6e4de;   /* page — foxed, not cream */
+  --parchment:  #ffffff;   /* page — foxed, not cream */
   --panel:      #e3ddcb;   /* raised areas */
-  --panel-deep: #c8c1ac;   /* recessed areas */
+  --panel-deep: #e8e3d5;   /* recessed areas */
   --ink:        #1e1a15;   /* body text */
   --ink-dim:    #6a6252;   /* secondary */
-  --oxblood:    #8c1c11;   /* dates, initials */
+  --oxblood:    #db1111;   /* dates, initials */
   --oxblood-lit:#a52618;
   --verdigris:  #0000EE;   /* links */
-  --gilt:       #8a6d2f;   /* ornaments */
-  --rule:       #a9a290;
-  --rule-soft:  #bdb6a2;
+  --gilt:       #49433e;   /* ornaments */
+  --rule:       #6f645d;
+  --rule-soft:  #a9988e;
 
   --display: "Gothic Script", Georgia, serif;
   --script:  "Gothic Script", Georgia, serif;
@@ -101,6 +101,56 @@ body::before {
   max-width: var(--measure);
   margin-inline: auto;
   padding-block: 2.5rem 5rem;
+}
+
+/* ---------- floaters ----------
+   Scattered curio images sitting behind the page content. `position:
+   fixed` means it ignores .manuscript-wrapper's width entirely (fixed
+   elements are laid out against the viewport, not their DOM parent,
+   as long as no ancestor has a transform/filter — none here do), so
+   the images can spread across the full page instead of being boxed
+   into the narrow centred reading column, even though the markup
+   lives inside the wrapper in index.njk. z-index -1 still sits them
+   below .manuscript-wrapper (1) and .bookmark-tabs (2) in paint order
+   (stacking context nesting follows DOM position, not the layout
+   escape) but above the parchment texture; the fade comes from
+   opacity + multiply blend below, and main.js nudges them on scroll
+   for drift. */
+.floaters {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.floater {
+  position: absolute;
+  max-width: none;
+  height: auto;
+  /* --floater-w is the authored size (set per-image in floaters.njk);
+     --floater-scale shrinks it uniformly on smaller windows below,
+     so the desktop layout/positions are untouched at scale 1. */
+  width: calc(var(--floater-w, 220px) * var(--floater-scale, 1));
+  opacity: 0.4;
+  filter: grayscale(1) sepia(0.35) brightness(1.55) contrast(0.85);
+  mix-blend-mode: multiply;
+  will-change: transform;
+  transform: rotate(var(--floater-rotate, 0deg));
+}
+
+/* same scatter/positions at every width — just scaled down so they
+   don't overwhelm a narrower viewport the way their desktop size would */
+@media (max-width: 900px) {
+  .floater { --floater-scale: 0.7; }
+}
+
+@media (max-width: 700px) {
+  .floater { --floater-scale: 0.6; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floater { transition: none; }
 }
 
 /* ---------- navigation ----------
