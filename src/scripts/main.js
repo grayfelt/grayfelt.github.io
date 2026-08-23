@@ -16,12 +16,26 @@
 (function () {
   "use strict";
 
-  /* Only headings, dates and list items get the tilt.
-   Body paragraphs stay untouched: it keeps long text readable, and
-   wrapping paragraph text in spans would break the rubricated
-   ::first-letter drop caps. */
-const SELECTOR = ".blog-entry-title, .blog-entry-date, .manuscript-header h1, li";
+  /* Only blog entries get the tilt — the rest of the chrome (nav,
+   footer, etc.) stays put. Within an entry, every letter is tilted,
+   except a post's first paragraph: its leading ::first-letter is a
+   rubricated drop cap, and wrapping that letter in a span breaks the
+   pseudo-element, so that paragraph is skipped. */
+const SELECTOR = ".blog-entry";
+  const DROP_CAP_SELECTOR = ".blog-entry-content > p:first-of-type";
   const MIN_WIDTH = 700; // skip the effect on phones — it hurts legibility
+
+  // Tweak these to adjust the typewriter feel.
+  const ROTATION_RANGE = 3.5;      // deg, per letter: +/- ROTATION_RANGE/2
+  const Y_OFFSET_RANGE = 1.1;      // px, per letter: +/- Y_OFFSET_RANGE/2
+  const BLEED_CHANCE = 0.01;     // fraction of letters that get an ink-bleed
+
+  // A "bleed" is a few solid, unblurred copies of the letter stacked at
+  // small offsets — like a key struck more than once on a worn ribbon —
+  // rather than a soft glow. STRIKES controls how many extra copies;
+  // OFFSET_RANGE how far (px) each one can drift from the original.
+  const BLEED_STRIKES_RANGE = [1, 3];
+  const BLEED_OFFSET_RANGE = 1.1; // px, per strike: +/- BLEED_OFFSET_RANGE/2
 
   function tiltTextNodes(root) {
     // A TreeWalker visits nodes one at a time. We ask for text
@@ -29,8 +43,8 @@ const SELECTOR = ".blog-entry-title, .blog-entry-date, .manuscript-header h1, li
     const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
       acceptNode(node) {
         if (!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
-        // don't touch anything already processed, or inside code
-        if (node.parentElement.closest(".random-text, code, pre, script, style")) {
+        // don't touch anything already processed, code, or the drop-cap paragraph
+        if (node.parentElement.closest(`.random-text, .random-text-word, code, pre, script, style, ${DROP_CAP_SELECTOR}`)) {
           return NodeFilter.FILTER_REJECT;
         }
         return NodeFilter.FILTER_ACCEPT;
@@ -52,13 +66,40 @@ const SELECTOR = ".blog-entry-title, .blog-entry-date, .manuscript-header h1, li
           fragment.appendChild(document.createTextNode(part));
           continue;
         }
-        const span = document.createElement("span");
-        span.className = "random-text";
-        const rotation = (Math.random() - 0.5) * 2;
-        const yOffset = (Math.random() - 0.5) * 3;
-        span.style.transform = `rotate(${rotation}deg) translateY(${yOffset}px)`;
-        span.textContent = part;
-        fragment.appendChild(span);
+        // Each letter gets its own tilt, so the word reads like it
+        // was struck one key at a time on an uneven typewriter.
+        // The letters are wrapped in a non-breaking word span first:
+        // adjacent inline-block boxes are otherwise a line-break
+        // opportunity even with no whitespace between them, which
+        // was splitting words mid-way onto the next line.
+        const wordWrapper = document.createElement("span");
+        wordWrapper.className = "random-text-word";
+
+        for (const letter of part) {
+          const span = document.createElement("span");
+          span.className = "random-text";
+          const rotation = (Math.random() - 0.5) * ROTATION_RANGE;
+          const yOffset = (Math.random() - 0.5) * Y_OFFSET_RANGE;
+          span.style.transform = `rotate(${rotation}deg) translateY(${yOffset}px)`;
+
+          if (Math.random() < BLEED_CHANCE) {
+            const strikeCount = Math.round(
+              BLEED_STRIKES_RANGE[0] + Math.random() * (BLEED_STRIKES_RANGE[1] - BLEED_STRIKES_RANGE[0])
+            );
+            const shadows = [];
+            for (let i = 0; i < strikeCount; i++) {
+              const dx = (Math.random() - 0.5) * BLEED_OFFSET_RANGE;
+              const dy = (Math.random() - 0.5) * BLEED_OFFSET_RANGE;
+              shadows.push(`${dx.toFixed(2)}px ${dy.toFixed(2)}px 0 currentColor`);
+            }
+            span.style.textShadow = shadows.join(", ");
+          }
+
+          span.textContent = letter;
+          wordWrapper.appendChild(span);
+        }
+
+        fragment.appendChild(wordWrapper);
       }
 
       node.parentNode.replaceChild(fragment, node);

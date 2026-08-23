@@ -1,0 +1,111 @@
+---
+layout: base.njk
+title: Timeline
+navKey: timeline
+description: Four years in Europe, month by month.
+permalink: /timeline/
+extraCss: timeline
+extraJs: timeline
+---
+<header class="manuscript-header">
+  <h1>Four Years, in Passing</h1>
+  <p class="tagline">A timeline of photos, documenting my 4 years in Estonia.</p>
+</header>
+
+<main>
+  <div class="timeline-wrap">
+    <div class="timeline-current-year" id="timeline-current-year" aria-hidden="true">
+      {{ timelineTrack | firstYear }}
+    </div>
+
+    <div class="timeline-body" id="timeline-body">
+      {% for month in timelineTrack %}
+
+        <section class="month-block{% if month.isEmpty %} is-empty{% endif %}"
+                  data-month-key="{{ month.domKey }}" data-year="{{ month.year }}"
+                  style="--h: {{ month.height }}rem"
+                  aria-label="{{ month.label }}">
+          <div class="sidebar-month{% if month.isEmpty %} is-empty{% endif %}">
+            <span class="sidebar-tick" aria-hidden="true"></span>
+            <span class="sidebar-label">{{ month.shortLabel }}</span>
+          </div>
+          {% for beat in month.beats %}
+
+            {% if beat.type == "bundle" %}
+              <div class="track-beat" style="--x: {{ beat.x }}%; --y: {{ beat.y }}rem">
+                <button class="bundle"
+                        data-bundle-key="{{ beat.domKey }}"
+                        data-title="{{ beat.title }}"
+                        data-subtitle="{{ beat.subtitle }}"
+                        aria-haspopup="dialog"
+                        aria-label="{{ beat.title }} — {{ beat.subtitle }}, open">
+                  <span class="bundle-stack" aria-hidden="true">
+                    {% for photo in beat.peek %}
+                      <span class="bundle-peek" style="--x: {{ photo.x }}rem; --y: {{ photo.y }}rem; --tilt: {{ photo.tilt }}deg; --z: {{ photo.z }}">
+                        {% image photo.slug, photo.caption, "120px", photo.folder %}
+                      </span>
+                    {% endfor %}
+                  </span>
+                  <span class="bundle-caption">
+                    <span class="bundle-title">{{ beat.title }}</span>
+                    <span class="bundle-subtitle">{{ beat.subtitle }}</span>
+                  </span>
+                </button>
+              </div>
+
+              <template class="bundle-photos" data-bundle-key="{{ beat.domKey }}">
+                {% for photo in beat.photos %}
+                  <button class="fan-photo size-{{ photo.size }}"
+                          style="--x: {{ photo.x }}%; --y: {{ photo.y }}%; --tilt: {{ photo.tilt }}deg; --z: {{ photo.z }}; --i: {{ photo.fanIndex }}"
+                          data-caption="{{ photo.caption }}"
+                          data-detail="{{ photo.detail or photo.caption }}"
+                          data-date="{{ photo.date | prettyDate }}"
+                          aria-label="{{ photo.caption }} — open photo">
+                    {% image photo.slug, photo.caption, "220px", photo.folder %}
+                    <span class="card-caption">{{ photo.caption }}</span>
+                  </button>
+                {% endfor %}
+              </template>
+
+            {% elif beat.type == "single" %}
+              <div class="track-beat" style="--x: {{ beat.x }}%; --y: {{ beat.y }}rem">
+                <button class="single-photo size-{{ beat.photo.size }}"
+                        style="--tilt: {{ beat.photo.tilt }}deg"
+                        data-caption="{{ beat.photo.caption }}"
+                        data-detail="{{ beat.photo.detail or beat.photo.caption }}"
+                        data-date="{{ beat.photo.date | prettyDate }}"
+                        aria-label="{{ beat.photo.caption }} — open photo">
+                  {% image beat.photo.slug, beat.photo.caption, "220px", beat.photo.folder %}
+                  <span class="card-caption">{{ beat.photo.caption }}</span>
+                </button>
+              </div>
+
+            {% elif beat.type == "note" %}
+              <div class="track-beat timeline-note" style="--x: {{ beat.x }}%; --y: {{ beat.y }}rem">
+                <p class="timeline-note-text">{{ beat.text }}</p>
+              </div>
+            {% endif %}
+
+          {% endfor %}
+        </section>
+
+      {% endfor %}
+    </div>
+  </div>
+</main>
+
+<!-- Tier 2: a bundle opened, all its photos fanned out for picking one -->
+<dialog class="bundle-dialog" id="bundle-dialog">
+  <button class="dialog-close" aria-label="Close">✕</button>
+  <div class="bundle-dialog-header">
+    <h2 id="bundle-dialog-title"></h2>
+    <p id="bundle-dialog-subtitle"></p>
+  </div>
+  <div class="fan-area" id="fan-area"></div>
+</dialog>
+
+<!-- Tier 3: a single photo, full view -->
+<dialog class="photo-dialog" id="photo-dialog">
+  <button class="dialog-close" aria-label="Close">✕</button>
+  <div class="photo-dialog-inner" id="photo-dialog-inner"></div>
+</dialog>

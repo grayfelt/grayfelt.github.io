@@ -39,26 +39,26 @@ a { color: inherit; }
 
 /* ---------- tokens ---------- */
 :root {
-  --parchment:  #ffffff;   /* page — foxed, not cream */
-  --panel:      #e3ddcb;   /* raised areas */
-  --panel-deep: #e8e3d5;   /* recessed areas */
+  --parchment:  #f8f3ed;   /* page — foxed, not cream */
+  --panel:      #decebd;   /* raised areas */
+  --panel-deep: #e0d8d0;   /* recessed areas */
   --ink:        #1e1a15;   /* body text */
-  --ink-dim:    #6a6252;   /* secondary */
+  --ink-dim:    #7a716d;   /* secondary */
   --oxblood:    #db1111;   /* dates, initials */
   --oxblood-lit:#a52618;
   --verdigris:  #0000EE;   /* links */
-  --gilt:       #49433e;   /* ornaments */
+  --gilt:       #817266;   /* ornaments */
   --rule:       #6f645d;
   --rule-soft:  #a9988e;
 
   --display: "Gothic Script", Georgia, serif;
   --script:  "Gothic Script", Georgia, serif;
-  --body:    "Times New Roman", Georgia, serif;
-  --utility: "Times New Roman", Georgia, serif;
+  --body:    'Times New Roman', serif;
+  --utility: 'Times New Roman', serif;
 
   /* Swap this to .png if that's what you upload.
      Delete the url() and it falls back to flat colour. */
-  --texture: url("/assets/images/texture.jpg");
+  --texture: url("/assets/images/paper_texture.jpg");
 
   --measure: 60rem;
   --margin-col: 13rem;
@@ -74,10 +74,13 @@ body {
   background-image: var(--texture);
   background-repeat: repeat;
   background-attachment: fixed;
+  background-size: 800px;
+  background-blend-mode: multiply;
   color: var(--ink);
   font-family: var(--body);
   font-size: clamp(1.08rem, 1rem + 0.4vw, 1.24rem);
   line-height: 1.64;
+  letter-spacing: -0.5px;
   padding-inline: var(--gutter);
 }
 
@@ -380,6 +383,9 @@ body::before {
 .image-missing code { text-transform: none; letter-spacing: 0; color: var(--oxblood); }
 
 /* ---------- word tilt ---------- */
+/* Each word is a nowrap inline-block so the line can only break
+   between words, never between the per-letter spans inside one. */
+.random-text-word { display: inline-block; white-space: nowrap; }
 .random-text { display: inline-block; }
 
 @media (prefers-reduced-motion: reduce) {

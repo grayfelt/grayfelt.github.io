@@ -1,0 +1,61 @@
+[
+  { "slug": "kitchen.jpg", "date": "2022-08-24", "caption": "My humble, headache green dorm kitchen.", "bundle": "Arrival"},
+  { "slug": "room.jpg", "date": "2022-08-24", "caption": "The first look at my room.", "bundle": "Arrival"},
+  { "slug": "square.jpg", "date": "2022-08-25", "caption": "Tartu's historic town center.", "bundle": "Arrival"},
+
+  { "slug": "ruins.jpg", "date": "2022-08-26", "caption": "Exploring Tartu's cathedral ruins.", "bundle": ""},
+
+  { "slug": "abandoned.jpg", "date": "2022-09-03", "caption": "Getting my fix of urban decay.", "bundle": ""},
+
+  { "slug": "market.jpg", "date": "2022-09-10", "caption": "", "bundle": "First steps"},
+  { "slug": "cat.jpg", "date": "2022-09-03", "caption": "An early friend.", "bundle": "First steps"},
+  { "slug": "church.jpg", "date": "2022-09-03", "caption": "A local Lutheran church.", "bundle": "First steps"},
+  { "slug": "stack.jpg", "date": "2022-09-25", "caption": "Sketching Tartu's then-standing smokestack. This landmark was useful to me as a visual guide to the skyline, much like the mountain ridges back home.", "bundle": "First steps"},
+  { "slug": "glow.jpg", "date": "2022-10-06", "caption": "A glowing image of an Orthodox church I passed quite often.", "bundle": "First steps"},
+  { "slug": "street.jpg", "date": "2022-10-06", "caption": "First signs of Autumn seen in a leafy street.", "bundle": "First steps"},
+  { "slug": "delta.jpg", "date": "2022-10-03", "caption": "Trees starting to turn outside of my university center.", "bundle": "First steps"},
+
+  { "slug": "bridge.jpg", "date": "2022-10-22", "caption": "Tartu's main footbridge I crossed at least a few thousand times.", "bundle": ""},
+  { "slug": "class.jpg", "date": "2022-10-20", "caption": "Trying my best to absorb today's lecture.", "bundle": ""},
+  { "slug": "police.jpg", "date": "2022-10-14", "caption": "Waiting in line to complete my visa application.", "bundle": ""},
+  { "slug": "river.jpg", "date": "2022-10-09", "caption": "Tartu's Emajogi river under a canopy of bright autumnal trees.", "bundle": ""},
+
+  { "slug": "alley.jpg", "date": "2022-11-04", "caption": "", "bundle": "First visit to Tallinn"},
+  { "slug": "street.jpg", "date": "2022-11-04", "caption": "", "bundle": "First visit to Tallinn"},
+  { "slug": "skyline.jpg", "date": "2022-11-04", "caption": "Me standing in front of a view of Tallinn's historic old town.", "bundle": "First visit to Tallinn"},
+  { "slug": "flowers.jpg", "date": "2022-11-04", "caption": "Tallinn's flower market, which is open 24/7.", "bundle": "First visit to Tallinn"},
+
+  { "slug": "museum.jpg", "date": "2022-11-04", "caption": "The Wallace Collection gallery in London.", "bundle": "Weekend in London"},
+  { "slug": "knight.jpg", "date": "2022-11-04", "caption": "A knight's armor in The Wallace Collection.", "bundle": "Weekend in London"},
+  { "slug": "parliment.jpg", "date": "2022-11-04", "caption": "The Houses of Parliment in London", "bundle": "Weekend in London"},
+
+  { "slug": "coop.jpg", "date": "2022-12-01", "caption": "My local Coop which sat attached to my apartment building. The bright LED sign, and promise of a late night snack, helped pull me through this cold tundra.", "bundle": ""},
+  { "slug": "cold.jpg", "date": "2022-12-10", "caption": "A frozen corner outside my dormitory.", "bundle": ""},
+  { "slug": "emajogi.jpg", "date": "2022-11-20", "caption": "An early sunset on a half-frozen Emajogi.", "bundle": ""},
+  { "slug": "frozen.jpg", "date": "2022-11-21", "caption": "", "bundle": ""},
+  { "slug": "lights.jpg", "date": "2022-11-27", "caption": "Tartu's town center lit up with festive lights, a skating rink, and a tree just out of view.", "bundle": ""},
+  { "slug": "notes.jpg", "date": "2022-12-17", "caption": "Studying for my first round of exams.", "bundle": ""},
+
+  { "slug": "cathedral.jpg", "date": "2022-12-21", "caption": "", "bundle": "Paris"},
+  { "slug": "notre.jpg", "date": "2022-12-21", "caption": "Notre Dame, only a few years after the tragic fire.", "bundle": "Paris"},
+  { "slug": "hill.jpg", "date": "2022-12-22", "caption": "Looking up at the Sacre-Coeur Basilica.", "bundle": "Paris"},
+  { "slug": "street1.jpg", "date": "2022-12-27", "caption": "", "bundle": "Paris"},
+  { "slug": "street2.jpg", "date": "2022-12-25", "caption": "A street in the Latin Quarter of Paris.", "bundle": "Paris"},
+  { "slug": "street3.jpg", "date": "2022-12-25", "caption": "", "bundle": "Paris"},
+  { "slug": "statue.jpg", "date": "2022-12-23", "caption": "The Winged Victory of Samothrace statue at the Louvre.", "bundle": "Paris"},
+  { "slug": "oppulent.jpg", "date": "2022-12-21", "caption": "", "bundle": "Paris"},
+
+  { "slug": "frozen-glow.jpg", "date": "2022-01-02", "caption": "A still frozen Emajogi.", "bundle": ""},
+  { "slug": "illuminated.jpg", "date": "2023-01-13", "caption": "", "bundle": ""},
+  { "slug": "botanical.jpg", "date": "2023-01-02", "caption": "Tartu University's Botanical Garden.", "bundle": ""},
+
+  { "slug": "brut.jpg", "date": "2023-01-14", "caption": "", "bundle": "Bus ride to Riga"},
+  { "slug": "bus.jpg", "date": "2023-01-14", "caption": "My excited face as we arrive.", "bundle": "Bus ride to Riga"},
+  { "slug": "markets.jpg", "date": "2023-01-14", "caption": "These enormous market halls face the central bus station.", "bundle": "Bus ride to Riga"},
+  { "slug": "old.jpg", "date": "2023-01-15", "caption": "Riga's old town.", "bundle": "Bus ride to Riga"},
+  { "slug": "rail.jpg", "date": "2023-01-14", "caption": "An old railway crossing made to look even older with my Android camera.", "bundle": "Bus ride to Riga"}
+
+
+
+
+]

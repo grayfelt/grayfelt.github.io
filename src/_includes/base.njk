@@ -9,15 +9,36 @@
   <link rel="stylesheet" href="/assets/styles/style.css">
   {% if extraCss %}<link rel="stylesheet" href="/assets/styles/{{ extraCss }}.css">{% endif %}
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-06NQ6Z8600"></script>
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-06NQ6Z8600');
+    // Visiting with ?internal=1 once marks this browser as "me" for good,
+    // so GA stays clean regardless of VPN/IP. See ?internal=0 to undo.
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      if (params.has("internal")) {
+        if (params.get("internal") === "0") {
+          localStorage.removeItem("ga_internal");
+        } else {
+          localStorage.setItem("ga_internal", "1");
+        }
+      }
+    })();
+  </script>
+  <script>
+    if (localStorage.getItem("ga_internal") !== "1") {
+      var gaScript = document.createElement("script");
+      gaScript.async = true;
+      gaScript.src = "https://www.googletagmanager.com/gtag/js?id=G-06NQ6Z8600";
+      document.head.appendChild(gaScript);
+
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', 'G-06NQ6Z8600');
+    }
   </script>
 </head>
-<body>
+<body{% if navKey %} class="page-{{ navKey }}"{% endif %}>
   {% include "nav.njk" %}
 
   <div class="manuscript-wrapper">
